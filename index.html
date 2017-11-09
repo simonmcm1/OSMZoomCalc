@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>OSM Zoom level calculator</title>
+</head>
+
+<body>
+
+<label>Zoom</label><input type="text" id="zoom-level"></input>
+<label>Latitude</label><input type="text" id="latitude"></input>
+<button id="calculate">Calculate</button>
+
+<div id="result"></div>
+</body>
+
+<script type="text/javascript">
+function toRadians (angle) {
+  return angle * (Math.PI / 180);
+}
+
+document.getElementById("calculate").addEventListener("click", function(evt) {
+	console.log("click")
+	var zoomElem = document.getElementById("zoom-level");
+	var latElem = document.getElementById("latitude");
+	var resultElem = document.getElementById("result");
+	if(zoomElem && zoomElem.value && latElem && latElem.value) {
+		var zoom = parseFloat(zoomElem.value);
+		var lat = parseFloat(latElem.value);
+		var C = 6372798.2;
+		var res = (C * 2 * Math.PI) * Math.cos(toRadians(lat));
+		res = res /Math.pow(2, zoom + 8);
+		result.innerHTML = "" + res;
+	}
+});
+
+
+</script>
+
+</html>
